@@ -6,14 +6,12 @@ import java.lang.reflect.InvocationTargetException;
 public class MoodAnalyzeFactory {
     public static MoodAnalyser createMoodAnalyzer(String message) {
         try {
-            Class<?> moodAnalyserClass = Class.forName("com.dummyproject.MoodAnalyzer");
+            Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyzer");
             Constructor<?> moodConstructor = null;
-            try {
-                moodConstructor = moodAnalyserClass.getConstructor(String.class);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
+            moodConstructor = moodAnalyserClass.getConstructor(String.class);
             moodConstructor.newInstance(message);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -28,7 +26,7 @@ public class MoodAnalyzeFactory {
 
     public static MoodAnalyser createMoodAnalyzer() {
         try {
-            Class<?> moodAnalyserClass = Class.forName("com.dummyproject.MoodAnalyzer");
+            Class<?> moodAnalyserClass = Class.forName("com.bridgelabz.MoodAnalyzer");
             Constructor<?> moodConstructor = null;
             try {
                 moodConstructor = moodAnalyserClass.getConstructor();
@@ -47,4 +45,18 @@ public class MoodAnalyzeFactory {
         }
         return null;
     }
+
+    public static Constructor<?> getConstructor(String param, Class<?> constructor)  {
+        try {
+            Class<?> moodAnalyserClass = Class.forName(param);
+            return moodAnalyserClass.getConstructor(constructor);
+        } catch (ClassNotFoundException e) {
+            throw new AnalyseMoodException(AnalyseMoodException.EnumExceptionType.CLASS_NOT_FOUND, e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new AnalyseMoodException(AnalyseMoodException.EnumExceptionType.NO_SUCH_METHOD, e.getMessage());
+        }
+    }
 }
+
+
+

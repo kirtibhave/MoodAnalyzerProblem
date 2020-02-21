@@ -89,15 +89,43 @@ public class MoodAnalyserTest {
     public void givenMoodAnalyserFactoryClass_toCreateMoodAnalyserObject() {
         try {
             MoodAnalyser moodAnalyser = MoodAnalyzeFactory.createMoodAnalyzer("");
-            String mood1= moodAnalyser.analyseMood();
-            Assert.assertEquals("Default",mood1);
+            String mood1 = moodAnalyser.analyseMood();
+            Assert.assertEquals("Default", mood1);
         } catch (AnalyseMoodException e) {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenMoodAnalyserClass_EqualsMethod_toCheckTwoObjectsAreEqual() {
+        try {
+            MoodAnalyser moodAnalyzer = new MoodAnalyzeFactory().createMoodAnalyzer();
+            Assert.assertEquals(new MoodAnalyser(), moodAnalyzer);
+        } catch (AnalyseMoodException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void givenMoodAnalyserClass_WhenImproper()  {
+        try {
+            Constructor<?> moodAnalyzer = new MoodAnalyzeFactory().getConstructor("com.bridgelabz.MoodAnygtgalyser", String.class);
+        } catch (AnalyseMoodException e) {
+            Assert.assertEquals(AnalyseMoodException.EnumExceptionType.CLASS_NOT_FOUND, e.type);
+
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyser_ConstructorIsNotProper()  {
+        try {
+            Constructor<?> moodAnalyzer = new MoodAnalyzeFactory().getConstructor("MoodAnalysercom.bridgelabz", int.class);
+
+        } catch (AnalyseMoodException e) {
+            Assert.assertEquals(AnalyseMoodException.EnumExceptionType.NO_SUCH_METHOD, e.type);
+        }
+
+    }
+
 }
-
-
-
-
-

@@ -22,8 +22,15 @@ public class MoodAnalyser {
             return "Happy";
         }
         catch (NullPointerException e) {
-            throw new AnalyseMoodException(AnalyseMoodException.EnumExceptionType.NULL_MESSAGE,"Please enter valid mood");
+                throw new AnalyseMoodException(AnalyseMoodException.EnumExceptionType.NULL_MESSAGE,"Please enter valid mood");
         }
 
     }
+    public boolean equals(Object another){
+        if(this.message.equals(((MoodAnalyser) another).message)) {
+            return true;
+        }
+     return false;
+    }
+
 }
