@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserTest {
+
     @Test
     public void givenNullMessage_ShouldReturnHappy() throws AnalyseMoodException {
         try {
@@ -41,7 +42,7 @@ public class MoodAnalyserTest {
 
 
     @Test
-    public void givenEmptyString() {
+    public void givenEmptyString() throws AnalyseMoodException {
         try {
             MoodAnalyser moodAnalyser = new MoodAnalyser("");
             String mood = MoodAnalyser.analyseMood();
@@ -73,30 +74,28 @@ public class MoodAnalyserTest {
     }
 
     @Test
-    public void okjoij() {
+    public void givenMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
         try {
             MoodAnalyser moodAnalyser = MoodAnalyzeFactory.createMoodAnalyzer("I am in happy mood");
             String mood = moodAnalyser.analyseMood();
-            Assert.assertEquals("Happy",mood);
-        }
-        catch (AnalyseMoodException e){
+            Assert.assertEquals("Happy", mood);
+        } catch (AnalyseMoodException e) {
             e.printStackTrace();
-
+        }
 
     }
 
     @Test
-    public void givenMoodAnalyzerClass_WhenProper_ShouldReturnObject() {
+    public void givenMoodAnalyserFactoryClass_toCreateMoodAnalyserObject() {
         try {
-            MoodAnalyser moodAnalyser = MoodAnalyzeFactory.createMoodAnalyzer("I am in happy mood");
-           // String mood = moodAnalyser.analyseMood();
-            Assert.assertEquals("Happy", mood);
+            MoodAnalyser moodAnalyser = MoodAnalyzeFactory.createMoodAnalyzer("");
+            String mood1= moodAnalyser.analyseMood();
+            Assert.assertEquals("Default",mood1);
         } catch (AnalyseMoodException e) {
             e.printStackTrace();
         }
     }
 }
-
 
 
 
